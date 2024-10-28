@@ -1,3 +1,4 @@
+import { useResizeObserver } from "@/editor/hooks/useResizeObserver";
 import { getComponentById, useComponetsStore } from "@/editor/store/components";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
@@ -24,7 +25,6 @@ const HoverMask = (props: HoverMaskProps) => {
 		if (!componentId) {
 			return;
 		}
-
 		const container = document.querySelector(`.${containerClassName}`);
 
 		if (!container) return;
@@ -55,6 +55,8 @@ const HoverMask = (props: HoverMaskProps) => {
 		});
 	}, [componentId, containerClassName]);
 
+	useResizeObserver(updatePosition);
+
 	const { components } = useComponetsStore();
 
 	const curComponent = useMemo(() => {
@@ -63,12 +65,22 @@ const HoverMask = (props: HoverMaskProps) => {
 
 	useEffect(() => {
 		updatePosition();
-	}, [componentId, updatePosition]);
+	}, [componentId, updatePosition, components]);
 
 	const el = useMemo(() => {
 		const el = document.querySelector(`.${mountNodeClassname}`);
 		return el;
 	}, [mountNodeClassname]);
+
+	useEffect(() => {
+		const resizeHandler = () => {
+			updatePosition();
+		};
+		window.addEventListener("resize", resizeHandler);
+		return () => {
+			window.removeEventListener("resize", resizeHandler);
+		};
+	}, [updatePosition]);
 
 	return createPortal(
 		<>
@@ -108,7 +120,7 @@ const HoverMask = (props: HoverMaskProps) => {
 						whiteSpace: "nowrap",
 					}}
 				>
-					{curComponent?.name}
+					{curComponent?.desc}
 				</div>
 			</div>
 		</>,

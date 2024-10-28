@@ -12,7 +12,13 @@ const Material = () => {
 	return (
 		<div className="h-full overflow-auto">
 			{components.map((item, index) => {
-				return <MaterialItem name={item.name} key={item.name + index} />;
+				return (
+					<MaterialItem
+						name={item.name}
+						desc={item.desc}
+						key={item.name + index}
+					/>
+				);
 			})}
 		</div>
 	);
@@ -20,26 +26,27 @@ const Material = () => {
 
 type MaterialItemProps = {
 	name: string;
+	desc: string;
 };
 
-const MaterialItem = ({ name }: MaterialItemProps) => {
+const MaterialItem = ({ name, desc }: MaterialItemProps) => {
 	const [_, drag] = useDrag({
 		type: name,
 		item: {
-			type: name,
+			name: name,
 		},
 	});
+
+	if (name === "Page") return null;
 
 	return (
 		<div
 			ref={drag}
 			className="border-dashed border border-black py-2 px-[10px] m-[10px] cursor-move inline-block bg-white hover:bg-[#ccc]"
 		>
-			{name}
+			{desc}
 		</div>
 	);
 };
-
-export {};
 
 export { Material };

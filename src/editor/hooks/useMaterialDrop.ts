@@ -14,17 +14,18 @@ export const useMaterialDrop = (props: UseMaterialDropProps) => {
 
 	const [{ canDrop }, drop] = useDrop(() => ({
 		accept,
-		drop: (item: { type: string }, monitor) => {
+		drop: (item: { name: string }, monitor) => {
 			if (monitor.didDrop()) {
 				return;
 			}
 
-			const props = componentConfig[item.type].defaultProps;
+			const { defaultProps, desc } = componentConfig[item.name];
 			addComponent(
 				{
 					id: new Date().getTime(),
-					name: item.type,
-					props,
+					name: item.name,
+					props: defaultProps,
+					desc: desc,
 				},
 				id
 			);

@@ -9,6 +9,7 @@ export interface ComponentConfig {
 	name: string;
 	defaultProps: Record<string, unknown>;
 	component: FunctionComponent<CommonComponentProps>;
+	desc: string;
 }
 
 interface State {
@@ -28,18 +29,21 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
 			name: "Container",
 			defaultProps: {},
 			component: Container,
+			desc: "容器",
 		},
 		Button: {
 			name: "Button",
 			defaultProps: {
-				text: "按钮",
+				text: "button",
 			},
 			component: Button,
+			desc: "按钮",
 		},
 		Page: {
 			name: "Page",
 			defaultProps: {},
 			component: Page,
+			desc: "页面 ",
 		},
 	},
 	registerComponent: (name, componentConfig) =>
