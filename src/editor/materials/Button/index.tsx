@@ -1,11 +1,12 @@
 import { Button as ShadcnButton } from "@/components/ui/button";
 
-type ButtonProps = {
-  text: string;
-};
-
-const Button = ({ text }: ButtonProps) => {
-  return <ShadcnButton>{text}</ShadcnButton>;
+import { CommonComponentProps } from "@/editor/interface";
+const Button = ({ text, id, name }: CommonComponentProps) => {
+	return (
+		<ShadcnButton data-component-name={name} data-component-id={id}>
+			{text as string}
+		</ShadcnButton>
+	);
 };
 
 export { Button };

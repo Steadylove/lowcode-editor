@@ -1,9 +1,10 @@
-import React from "react";
+import { useComponetsStore } from "../store/components";
 
-type SettingProps = {};
-
-const Setting = (props: SettingProps) => {
-  return <div>setting</div>;
+const Setting = () => {
+	const { components } = useComponetsStore();
+	return (
+		<pre className="overflow-auto">{JSON.stringify(components, null, 2)}</pre>
+	);
 };
 
 export { Setting };
