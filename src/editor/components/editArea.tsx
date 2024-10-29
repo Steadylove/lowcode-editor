@@ -59,6 +59,7 @@ const EditArea = () => {
 					...component.props,
 					id: component.id,
 					name: component.name,
+					styles: component.styles,
 				},
 				renderComponents(component.children || [])
 			);

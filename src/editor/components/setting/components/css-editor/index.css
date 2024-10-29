@@ -1,0 +1,12 @@
+.monaco-editor .line-numbers {
+	width: 100% !important;
+	text-align: center !important;
+}
+.margin,
+.margin-view-overlays {
+	width: 30px !important;
+}
+.monaco-scrollable-element {
+	left: 30px !important;
+	width: calc(100% - 30px) !important;
+}

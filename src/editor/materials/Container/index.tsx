@@ -2,7 +2,7 @@ import { CommonComponentProps } from "@/editor/interface";
 
 import { useMaterialDrop } from "@/editor/hooks/useMaterialDrop";
 
-const Container = ({ children, id, name }: CommonComponentProps) => {
+const Container = ({ children, id, name, styles }: CommonComponentProps) => {
 	const { canDrop, drop } = useMaterialDrop({
 		accept: ["Button", "Container"],
 		id,
@@ -13,10 +13,10 @@ const Container = ({ children, id, name }: CommonComponentProps) => {
 			data-component-name={name}
 			data-component-id={id}
 			ref={drop}
-			className="min-h-[100px] p-5"
-			style={{
-				border: canDrop ? "2px solid blue" : "1px solid black",
-			}}
+			className={`min-h-[100px] p-5 ${
+				canDrop ? "border-[2px] border-blue-400" : "border border-black"
+			}`}
+			style={styles}
 		>
 			{children}
 		</div>
