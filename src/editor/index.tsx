@@ -1,7 +1,7 @@
 import { Allotment } from "allotment";
 import "allotment/dist/style.css";
 import { EditArea } from "./components/editArea";
-import { Material } from "./components/material";
+import { MaterialWrapper } from "./components/material";
 import { Setting } from "./components/setting";
 
 export default function LowcodeEditor() {
@@ -11,8 +11,8 @@ export default function LowcodeEditor() {
 				header
 			</div>
 			<Allotment>
-				<Allotment.Pane preferredSize={240} maxSize={300} minSize={200}>
-					<Material />
+				<Allotment.Pane preferredSize={240} maxSize={500} minSize={200}>
+					<MaterialWrapper />
 				</Allotment.Pane>
 				<Allotment.Pane>
 					<EditArea />

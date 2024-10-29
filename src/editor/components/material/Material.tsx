@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useComponentConfigStore } from "../store/component-config";
+import { useComponentConfigStore } from "../../store/component-config";
 import { useDrag } from "react-dnd";
 
 const Material = () => {
