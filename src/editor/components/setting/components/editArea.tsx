@@ -1,8 +1,8 @@
 import React, { MouseEventHandler, useState } from "react";
-import { useComponentConfigStore } from "../store/component-config";
-import { useComponetsStore, Component } from "../store/components";
-import { HoverMask } from "./hover-mask";
-import { SelectMask } from "./select-mask";
+import { useComponentConfigStore } from "../../../store/component-config";
+import { useComponetsStore, Component } from "../../../store/components";
+import { HoverMask } from "../../hover-mask";
+import { SelectMask } from "../../select-mask";
 
 const EDITAREA_CLASSNAME = "edit-area";
 

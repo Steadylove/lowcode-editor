@@ -12,9 +12,7 @@ const Page = ({ children, id, name, styles }: CommonComponentProps) => {
 			data-component-name={name}
 			data-component-id={id}
 			ref={drop}
-			className={`h-full box-border p-5 ${
-				canDrop ? "border-[2px] border-blue-400" : ""
-			}`}
+			className={`h-full ${canDrop ? "border-[2px] border-blue-400" : ""}`}
 			style={styles}
 		>
 			{children}

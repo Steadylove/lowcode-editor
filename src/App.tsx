@@ -1,6 +1,7 @@
 import LowcodeEditor from "./editor/index";
 function App() {
-  return <LowcodeEditor></LowcodeEditor>;
+	console.log(import.meta.env);
+	return <LowcodeEditor></LowcodeEditor>;
 }
 
 export default App;

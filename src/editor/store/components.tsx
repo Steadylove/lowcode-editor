@@ -1,6 +1,11 @@
 import { CSSProperties } from "react";
 import { create } from "zustand";
 
+export interface ComponentAction {
+	event: string;
+	code: string;
+}
+
 export interface Component {
 	id: number;
 	name: string;
@@ -9,14 +14,17 @@ export interface Component {
 	parentId?: number;
 	desc: string;
 	styles?: CSSProperties;
+	actions: ComponentAction[];
 }
 
 interface State {
+	mode: "edit" | "preview";
 	components: Component[];
 	curComponent: Component | null;
 }
 
 interface Action {
+	updateComponent: (json: Component[]) => void;
 	addComponent: (component: Component, parentId?: number) => void;
 	deleteComponent: (componentId: number) => void;
 	updateComponentProps: (
@@ -28,19 +36,29 @@ interface Action {
 		styles: CSSProperties,
 		replace?: boolean
 	) => void;
+	updateComponentAction: (componentId: number, action: ComponentAction) => void;
 	setCurComponent: (componentId?: number) => void;
+	setMode: (mode: State["mode"]) => void;
 }
 
 export const useComponetsStore = create<State & Action>((set, get) => ({
+	mode: "edit",
 	components: [
 		{
 			id: new Date().getTime(),
 			name: "Page",
 			props: {},
 			desc: "页面",
+			actions: [],
 		},
 	],
 	curComponent: null,
+	updateComponent: (json) => {
+		const components = json as Component[];
+		set(() => ({
+			components,
+		}));
+	},
 	addComponent: (component, parentId) =>
 		set((state) => {
 			if (parentId) {
@@ -91,6 +109,25 @@ export const useComponetsStore = create<State & Action>((set, get) => ({
 		});
 	},
 
+	updateComponentAction: (componentId, action) => {
+		set((state) => {
+			const component = getComponentById(componentId, state.components);
+			if (!component) return state;
+
+			const { code, event } = action;
+			if (!component.actions.find((i) => i.event === event)) {
+				component.actions.push({
+					event,
+					code,
+				});
+			} else {
+				component.actions.find((i) => i.event === event)!.code = code;
+			}
+
+			return { components: [...state.components] };
+		});
+	},
+
 	updateComponentProps: (componentId, props) =>
 		set((state) => {
 			const component = getComponentById(componentId, state.components);
@@ -111,6 +148,12 @@ export const useComponetsStore = create<State & Action>((set, get) => ({
 		set((state) => ({
 			curComponent: id ? getComponentById(id, state.components) : null,
 		}));
+	},
+
+	setMode: (mode) => {
+		set({
+			mode,
+		});
 	},
 }));
 

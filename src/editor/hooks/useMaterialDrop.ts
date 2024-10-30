@@ -26,6 +26,7 @@ export const useMaterialDrop = (props: UseMaterialDropProps) => {
 					name: item.name,
 					props: defaultProps,
 					desc: desc,
+					actions: [],
 				},
 				id
 			);

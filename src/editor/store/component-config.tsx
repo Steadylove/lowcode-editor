@@ -4,6 +4,9 @@ import { Container } from "../materials/Container";
 import { Page } from "../materials/Page";
 import { FunctionComponent } from "react";
 import { CommonComponentProps } from "../interface";
+import { Button as ProdButton } from "../materials/Button/prod";
+import { Container as ProdContainer } from "../materials/Container/pord";
+import { Page as ProdPage } from "../materials/Page/prod";
 
 type SetterType = "select" | "input" | "inputNumber";
 
@@ -14,13 +17,20 @@ export interface ComponentSetter {
 	[key: string]: unknown;
 }
 
+export interface ComponentEvent {
+	name: string;
+	label: string;
+}
+
 export interface ComponentConfig {
 	name: string;
 	defaultProps: Record<string, unknown>;
 	component: FunctionComponent<CommonComponentProps>;
+	prodComponent: FunctionComponent<CommonComponentProps>;
 	desc: string;
 	componentSetters?: ComponentSetter[];
 	stylesSetter?: ComponentSetter[];
+	events?: ComponentEvent[];
 }
 
 interface State {
@@ -40,6 +50,7 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
 			name: "Container",
 			defaultProps: {},
 			component: Container,
+			prodComponent: ProdContainer,
 			desc: "容器",
 		},
 		Button: {
@@ -48,6 +59,7 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
 				text: "button",
 			},
 			component: Button,
+			prodComponent: ProdButton,
 			desc: "按钮",
 			componentSetters: [
 				{
@@ -71,6 +83,16 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
 					type: "input",
 				},
 			],
+			events: [
+				{
+					name: "onClick",
+					label: "点击",
+				},
+				{
+					name: "onDoubleClick",
+					label: "双击",
+				},
+			],
 			stylesSetter: [
 				{
 					name: "width",
@@ -88,6 +110,7 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
 			name: "Page",
 			defaultProps: {},
 			component: Page,
+			prodComponent: ProdPage,
 			desc: "页面 ",
 		},
 	},

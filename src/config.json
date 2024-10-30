@@ -1,0 +1,61 @@
+[
+	{
+		"id": 1730289628884,
+		"name": "Page",
+		"props": {},
+		"desc": "页面",
+		"actions": [],
+		"children": [
+			{
+				"id": 1730289630172,
+				"name": "Container",
+				"props": {},
+				"desc": "容器",
+				"actions": [],
+				"parentId": 1730289628884,
+				"children": [
+					{
+						"id": 1730289632106,
+						"name": "Button",
+						"props": {
+							"text": "button"
+						},
+						"desc": "按钮",
+						"actions": [],
+						"parentId": 1730289630172
+					}
+				]
+			},
+			{
+				"id": 1730289633556,
+				"name": "Container",
+				"props": {},
+				"desc": "容器",
+				"actions": [],
+				"parentId": 1730289628884,
+				"children": [
+					{
+						"id": 1730289634439,
+						"name": "Button",
+						"props": {
+							"text": "button"
+						},
+						"desc": "按钮",
+						"actions": [],
+						"parentId": 1730289633556
+					},
+					{
+						"id": 1730289635589,
+						"name": "Button",
+						"props": {
+							"text": "button"
+						},
+						"desc": "按钮",
+						"actions": [],
+						"parentId": 1730289633556
+					}
+				]
+			}
+		]
+	}
+]
